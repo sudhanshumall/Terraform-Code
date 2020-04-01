@@ -1,7 +1,9 @@
-resource "aws_security_group" "allow_ssh" {
-  name        = "allow_SSH"
+resource "aws_security_group" "allow_SSH" {
+  name        = var.tag_name
   description = "Allow SSH inbound traffic"
   vpc_id      = var.vpc_id
+
+  tags  = { Name = var.tag_name } 
 
   ingress {
     # All ports allowed, ake sure to change this 
