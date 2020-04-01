@@ -1,4 +1,4 @@
-This terraform code launches an AWS EC2 instance inside defined VPC and subnet along with increased root ebs volume and security group.
+This terraform code launches an AWS EC2 instance inside mentioned VPC and subnet along with increased root ebs volume and security group.
 
 Command used :
 
