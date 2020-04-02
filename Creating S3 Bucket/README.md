@@ -14,6 +14,6 @@ To destroy everything which this code created:
 
     terraform destroy -var-file=s3.tfvars -auto-approve
 
-Note : Before destroying please "prevent_destroy" value to false and then fire "terraform destroy -var-file=s3.tfvars -auto-approve" command
+Note : Before destroying please update "prevent_destroy" value to "false" and then fire "terraform destroy -var-file=s3.tfvars -auto-approve" command
 
 
