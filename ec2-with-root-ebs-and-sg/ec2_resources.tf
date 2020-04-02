@@ -5,7 +5,7 @@ resource "aws_instance" "my_instance" {
   security_groups             = [ aws_security_group.allow_SSH.id ]
   subnet_id                   = var.instance_subnet_id
   key_name                    = var.key_name
-  instance_type               = var.instance_type
+  instance_type               = "${lookup(var.instance_type,var.env)}"
   associate_public_ip_address = true
 
 

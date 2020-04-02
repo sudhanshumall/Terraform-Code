@@ -15,8 +15,19 @@ variable "key_name" {
   
 }
 
-variable "instance_type" {
+variable "env" {
   
+}
+
+
+variable "instance_type" {
+    
+    type = "map"
+    default = {
+
+        dev = "t2.micro",
+        prod = "t2.medium"
+    }
 }
 
 variable "tag_name" {
