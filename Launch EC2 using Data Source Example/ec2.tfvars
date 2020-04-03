@@ -1,0 +1,7 @@
+aws_region = "ap-south-1"
+ami = "ami-0620d12a9cf777c87" 
+instance_subnet_id = "subnet-79300d11"
+tag_name = "Terraform"
+env = "dev"
+key_name = "terraform"
+vpc_id = "vpc-71332719"
