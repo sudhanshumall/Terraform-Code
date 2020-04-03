@@ -1,4 +1,4 @@
-This terraform code creates completed end to end VPC setup.
+This terraform code creates end to end VPC setup.
 
 It creates your VPC, Public and Private subnets in each availability zones, Public and Private route tables and Internet Gateway.
 
