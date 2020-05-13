@@ -23,11 +23,8 @@ pipeline {
         stage('Build') {
             steps {
                sh '''
-                    printenv
                     pwd
                     ls -la
-                    mkdir -p /var/jenkins_home/${branch}
-                    
                     '''
             }
         }
