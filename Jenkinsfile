@@ -1,14 +1,12 @@
 pipeline {
-  agent {
-        node {
-            customWorkspace '/var/jenkins_home/'          
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+                echo "branch ${BRANCH}"
+            }
         }
     }
-  stages {
-    stage('Testing Multibranch pipeline') {
-      steps {
-           echo "Sparse Checkout paths - helpers"
-      }
-    }
-    }
-  }
+}
