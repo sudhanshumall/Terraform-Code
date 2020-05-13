@@ -5,6 +5,14 @@ pipeline {
     agent any
 
     stages {
+        stage('Checkout SCM') {
+            steps {
+               ws('/var/jenkins_home/')
+               checkout scm
+            }
+        }
+
+
         stage('Build') {
             steps {
                sh '''
