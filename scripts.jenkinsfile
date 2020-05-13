@@ -1,16 +1,19 @@
+// Define variable
+def branch = env.GIT_BRANCH
+
 pipeline {
     agent any
 
     stages {
         stage('Build') {
             steps {
-
-               branch=env.GIT_BRANCH
                sh '''
                     printenv
                     pwd
                     ls -la
-                    mkdir -p /var/jenkins_home/$branch
+                    rm -rf /var/jenkins_home/${branch}
+                    mkdir -p /var/jenkins_home/${branch}
+                    
                     '''
             }
         }
