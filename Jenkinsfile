@@ -10,7 +10,7 @@ pipeline {
                     ls -la
                     mkdir -p /var/jenkins_home/env.BRANCH_NAME
                     '''
-                
+               }
             }
         }
     }
