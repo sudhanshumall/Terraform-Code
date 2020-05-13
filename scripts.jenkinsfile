@@ -11,7 +11,6 @@ pipeline {
                     printenv
                     pwd
                     ls -la
-                    rm -rf /var/jenkins_home/${branch}
                     mkdir -p /var/jenkins_home/${branch}
                     
                     '''
