@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+    node {
+      customWorkspace '/var/jenkins_home/'
+    }
+  }
 
     stages {
         stage('Build') {
