@@ -4,8 +4,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
-                echo "branch "+ env.BRANCH_NAME
+               steps {
+                    sh '''
+                    pwd
+                    ls -la
+                    mkdir -p /var/jenkins_home/env.BRANCH_NAME
+                    '''
+                
             }
         }
     }
