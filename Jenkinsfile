@@ -4,13 +4,11 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               steps {
-                    sh '''
+               sh '''
                     pwd
                     ls -la
                     mkdir -p /var/jenkins_home/env.BRANCH_NAME
                     '''
-               }
             }
         }
     }
