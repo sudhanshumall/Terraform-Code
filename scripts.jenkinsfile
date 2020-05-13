@@ -2,16 +2,21 @@
 def branch = env.GIT_BRANCH
 
 pipeline {
-    agent any
+    //agent any
 
-    stages {
-        stage('Checkout SCM') {
-            steps {
-               ws('/var/jenkins_home/')
-               checkout scm
+    // stages {
+    //     stage('Checkout SCM') {
+    //         steps {
+    //            ws('/var/jenkins_home/')
+               
+    //         }
+    //     }
+        agent {
+        label {
+            label ""
+            customWorkspace "/var/jenkins_home/${BRANCH_NAME}"
             }
         }
-
 
         stage('Build') {
             steps {
