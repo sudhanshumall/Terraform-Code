@@ -1,5 +1,5 @@
 // Define variable
-
+ def M2_REPO = "/var/lib/jenkins/.m2/${BRANCH_NAME}"
 
 pipeline {
     //agent any
@@ -22,12 +22,11 @@ pipeline {
 
         stage('Build') {
             steps {
-            def M2_REPO = "/var/lib/jenkins/.m2/${BRANCH_NAME}"
+           
             echo "${BRANCH_NAME}"
                sh '''  
-               echo "m2 repo ${M2_REPO}" 
-               
                echo "inside shell branch name : ${BRANCH_NAME}"
+               echo "${BUILD_NUMBER}"
 
                     pwd
                     ls -la
