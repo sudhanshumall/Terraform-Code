@@ -1,5 +1,5 @@
 // Define variable
-def branch = env.GIT_BRANCH
+def M2_REPO = ${HOME}/.m2/${BRANCH_NAME}
 
 pipeline {
     //agent any
@@ -23,8 +23,9 @@ pipeline {
         stage('Build') {
             steps {
             echo "${BRANCH_NAME}"
-               sh '''   
-               echo "inside shell : ${branch}"
+               sh '''  
+               echo "m2 repo ${M2_REPO}" 
+               
                echo "inside shell branch name : ${BRANCH_NAME}"
 
                     pwd
