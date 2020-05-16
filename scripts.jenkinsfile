@@ -1,5 +1,5 @@
 // Define variable
-def M2_REPO = ${HOME}/.m2/${BRANCH_NAME}
+def M2_REPO = "${HOME}/.m2/${BRANCH_NAME}"
 
 pipeline {
     //agent any
