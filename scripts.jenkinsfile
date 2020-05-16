@@ -22,9 +22,11 @@ pipeline {
 
         stage('Build') {
             steps {
-            echo "${branch}"
+            echo "${BRANCH_NAME}"
                sh '''   
                echo "inside shell : ${branch}"
+               echo "inside shell branch name : ${BRANCH_NAME}"
+
                     pwd
                     ls -la
                     '''
