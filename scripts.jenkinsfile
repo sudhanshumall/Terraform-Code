@@ -22,7 +22,6 @@ pipeline {
 
         stage('Build') {
             steps {
-            def branch = env.GIT_BRANCH
             echo "${branch}"
                sh '''   
                echo "inside shell : ${branch}"
