@@ -22,7 +22,10 @@ pipeline {
 
         stage('Build') {
             steps {
-               sh '''
+            def branch = env.GIT_BRANCH
+            echo "${branch}"
+               sh '''   
+               echo "inside shell : ${branch}"
                     pwd
                     ls -la
                     '''
