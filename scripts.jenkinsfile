@@ -13,7 +13,7 @@ pipeline {
 
      stages {
     
-        stage("Building ${BRANCH_NAME}") {
+        stage('Building Code') {
 
             steps {
            
