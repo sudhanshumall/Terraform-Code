@@ -20,10 +20,10 @@ pipeline {
     //     }
         
 
-        stage('Build Master Branch') {
+        stage('Build multibranch Branch') {
 
             when{
-                branch 'master'
+                branch 'multibranch'
              }
             steps {
            
