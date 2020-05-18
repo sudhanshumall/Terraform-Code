@@ -34,6 +34,7 @@ pipeline {
                     echo "Building $BRANCH_NAME"
                 elif [ $BRANCH_NAME = "dev" ] ; then
                     echo "Building $BRANCH_NAME"
+                fi
                
                     '''
             }
