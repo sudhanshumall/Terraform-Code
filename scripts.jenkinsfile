@@ -28,16 +28,13 @@ pipeline {
                 }
             
                sh '''  
-               echo "inside sh"
 
-                echo "-------------"
-
-               echo "Building ${BRANCH_NAME} Branch"
-               echo "inside shell branch name : ${BRANCH_NAME}"
-               echo "${BUILD_NUMBER}"
-
-                    pwd
-                    ls -la
+                echo "Inside sh"
+               if [ $BRANCH_NAME = "multibranch" ] ; then
+                    echo "Building $BRANCH_NAME"
+                elif [ $BRANCH_NAME = "dev" ] ; then
+                    echo "Building $BRANCH_NAME"
+               
                     '''
             }
         }
