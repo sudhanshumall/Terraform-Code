@@ -12,23 +12,22 @@ pipeline {
         }
 
      stages {
-    //     stage('Checkout SCM') {
-    //         steps {
-    //            ws('/var/jenkins_home/')
-               
-    //         }
-    //     }
-        
+    
+        stage('Building') {
 
-        stage('Build multibranch Branch') {
-
-            when{
-                branch 'multibranch'
-             }
             steps {
            
-            echo "Building ${BRANCH_NAME} Branch"
+
+                script {
+                    if ("${BRANCH_NAME}" == 'multibranch') {
+                        echo "Building ${BRANCH_NAME} branch"
+                    } else if ("${BRANCH_NAME}" == 'dev') {
+                        echo "Building ${BRANCH_NAME} branch"
+                    }
+                }
+            
                sh '''  
+               echo "Building ${BRANCH_NAME} Branch"
                echo "inside shell branch name : ${BRANCH_NAME}"
                echo "${BUILD_NUMBER}"
 
@@ -38,23 +37,23 @@ pipeline {
             }
         }
 
-        stage('Build Dev Branch') {
+        // stage('Building Dev Branch') {
 
-            when{
-                branch 'dev'
-             }
-            steps {
+        //     when{
+        //         branch 'dev'
+        //      }
+        //     steps {
            
-            echo "Building ${BRANCH_NAME} branch"
-               sh '''  
-               echo "inside shell branch name : ${BRANCH_NAME}"
-               echo "${BUILD_NUMBER}"
+        //     echo "Building ${BRANCH_NAME} branch"
+        //        sh '''  
+        //        echo "inside shell branch name : ${BRANCH_NAME}"
+        //        echo "${BUILD_NUMBER}"
 
-                    pwd
-                    ls -la
-                    '''
-            }
-        }
+        //             pwd
+        //             ls -la
+        //             '''
+        //     }
+        // }
 
 
     }
