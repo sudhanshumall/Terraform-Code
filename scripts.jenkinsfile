@@ -21,21 +21,16 @@ pipeline {
                 script {
                     echo "inside script"
                     if ("${BRANCH_NAME}" == 'multibranch') {
-                        echo "Building ${BRANCH_NAME} branch"
+                        echo "*** Building ${BRANCH_NAME} branch ***"
                     } else if ("${BRANCH_NAME}" == 'dev') {
-                        echo "Building ${BRANCH_NAME} branch"
+                        echo "*** Building ${BRANCH_NAME} branch ***"
                     }
                 }
             
                sh '''  
                echo "inside sh"
 
-               if ("${BRANCH_NAME}" == "multibranch") {
-                        echo "Building ${BRANCH_NAME} branch"
-                    } else if ("${BRANCH_NAME}" == "dev") {
-                        echo "Building ${BRANCH_NAME} branch"
-                    }
-
+                echo "-------------"
 
                echo "Building ${BRANCH_NAME} Branch"
                echo "inside shell branch name : ${BRANCH_NAME}"
