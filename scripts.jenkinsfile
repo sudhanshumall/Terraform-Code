@@ -41,7 +41,7 @@ pipeline {
                     }
                 }
             
-               sh '''  
+               sh """
 
                 echo "Inside sh"
                 echo "job name : ${JOBNAME}"
@@ -51,7 +51,7 @@ pipeline {
                     echo "Building $BRANCH_NAME"
                 fi
                
-                    '''
+                """            
             }
         }
 
