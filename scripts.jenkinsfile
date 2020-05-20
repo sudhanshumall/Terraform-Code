@@ -5,7 +5,7 @@ pipeline {
     //agent any
 
 
-    options([parameters([string(defaultValue: 'default', description: '', name: 'PLACEHOLDER', trim: false)])])
+    parameters([string(defaultValue: 'default', description: '', name: 'PLACEHOLDER', trim: false)])
 
     agent {
         label {
