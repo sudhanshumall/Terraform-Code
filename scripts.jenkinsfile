@@ -55,6 +55,22 @@ pipeline {
             }
         }
 
+        stage('Testing Code') {
+
+            steps {
+
+                script {
+
+                    sh """
+
+                        echo "job name : ${JOBNAME}"
+
+                    """
+                   
+                }
+            }
+        }
+
         // stage('Building Dev Branch') {
 
         //     when{
