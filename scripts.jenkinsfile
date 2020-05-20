@@ -1,5 +1,7 @@
 // Define variable
  def M2_REPO = "/var/lib/jenkins/.m2/${BRANCH_NAME}"
+ def JOB = JOB_NAME.tokenize('/') as String[]
+ def JOBNAME = JOB[0]
 
 pipeline {
     //agent any
@@ -11,14 +13,24 @@ pipeline {
             }
         }
 
-     stages {
+    parameters{
+        string(
+            defaultValue: 'default', 
+            description: '<b> Mention Client name, if building for client and Do not use space </b>', 
+            name: 'PLACEHOLDER', 
+            trim: false
+            )
+    }
+
+    stages {
     
         stage('Building Code') {
 
             steps {
                 
                 sh "echo place holder : ${params.PLACEHOLDER}"
-                sh "echo job base name : $JOB_BASE_NAME"
+                sh "echo job base name : ${JOB_BASE_NAME}"
+                sh "echo job name : ${JOBNAME}"
 
                 script {
                     echo "inside script"
@@ -61,49 +73,5 @@ pipeline {
         // }
 
 
-    }
-}
-
-
-// Define variable
-
-pipeline {
-    //agent any
-
-    agent {
-        label {
-            label "master"
-            }
-        }
-
-     stages {
-        stage('Building') {
-
-            steps {
-
-                sh '''  
-
-                    if [ $BRANCH_NAME = "master" ] ; then
-                        echo "Building $BRANCH_NAME"
-                        mvn -Dmaven.repo.local="${HOME}/.m2/${BRANCH_NAME}/repository" -Pprod clean install deploy -U
-
-                    elif [ $BRANCH_NAME = "beta" ] ; then
-                        echo "Building $BRANCH_NAME"
-                        mvn -Dmaven.repo.local="${HOME}/.m2/${BRANCH_NAME}/repository" -Pbeta clean install deploy -U
-
-                    elif [ $BRANCH_NAME = "dev" ] ; then
-                        echo "Building $BRANCH_NAME"
-                        mvn -Dmaven.repo.local="${HOME}/.m2/${BRANCH_NAME}/repository" -Pdev clean install deploy -U
-                    fi    
-                
-                echo "---------------------------------"
-                echo "Branch Name : ${BRANCH_NAME}"
-                echo "Build Number : ${BUILD_NUMBER}"
-                echo "Environment : ${BRANCH_NAME}"
-                echo "---------------------------------"
-
-                '''
-            }
-        }
     }
 }
