@@ -44,6 +44,7 @@ pipeline {
                sh '''  
 
                 echo "Inside sh"
+                echo "job name : ${JOBNAME}"
                if [ $BRANCH_NAME = "multibranch" ] ; then
                     echo "Building $BRANCH_NAME"
                 elif [ $BRANCH_NAME = "dev" ] ; then
