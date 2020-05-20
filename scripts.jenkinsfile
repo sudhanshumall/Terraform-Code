@@ -4,6 +4,9 @@
 pipeline {
     //agent any
 
+
+    properties([parameters([string(defaultValue: 'default', description: '', name: 'PLACEHOLDER', trim: false)])])
+
     agent {
         label {
             label ""
@@ -16,7 +19,8 @@ pipeline {
         stage('Building Code') {
 
             steps {
-           
+                
+                sh "echo ${params.PLACEHOLDER}"
 
                 script {
                     echo "inside script"
@@ -59,5 +63,49 @@ pipeline {
         // }
 
 
+    }
+}
+
+
+// Define variable
+
+pipeline {
+    //agent any
+
+    agent {
+        label {
+            label "master"
+            }
+        }
+
+     stages {
+        stage('Building') {
+
+            steps {
+
+                sh '''  
+
+                    if [ $BRANCH_NAME = "master" ] ; then
+                        echo "Building $BRANCH_NAME"
+                        mvn -Dmaven.repo.local="${HOME}/.m2/${BRANCH_NAME}/repository" -Pprod clean install deploy -U
+
+                    elif [ $BRANCH_NAME = "beta" ] ; then
+                        echo "Building $BRANCH_NAME"
+                        mvn -Dmaven.repo.local="${HOME}/.m2/${BRANCH_NAME}/repository" -Pbeta clean install deploy -U
+
+                    elif [ $BRANCH_NAME = "dev" ] ; then
+                        echo "Building $BRANCH_NAME"
+                        mvn -Dmaven.repo.local="${HOME}/.m2/${BRANCH_NAME}/repository" -Pdev clean install deploy -U
+                    fi    
+                
+                echo "---------------------------------"
+                echo "Branch Name : ${BRANCH_NAME}"
+                echo "Build Number : ${BUILD_NUMBER}"
+                echo "Environment : ${BRANCH_NAME}"
+                echo "---------------------------------"
+
+                '''
+            }
+        }
     }
 }
