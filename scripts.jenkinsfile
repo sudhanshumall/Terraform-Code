@@ -11,22 +11,14 @@ pipeline {
             }
         }
 
-    parameters{
-        string(
-            defaultValue: 'default', 
-            description: '<b> Mention Client name, if building for client \n Do not use space </b>', 
-            name: 'PLACEHOLDER', 
-            trim: false
-            )
-    }
-
      stages {
     
         stage('Building Code') {
 
             steps {
                 
-                sh "echo ${params.PLACEHOLDER}"
+                sh "echo place holder : ${params.PLACEHOLDER}"
+                sh "echo job base name : $JOB_BASE_NAME"
 
                 script {
                     echo "inside script"
