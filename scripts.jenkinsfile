@@ -14,7 +14,7 @@ pipeline {
     parameters{
         string(
             defaultValue: 'default', 
-            description: 'Mention Client name, if building for client \n Do not use space ', 
+            description: '<b> Mention Client name, if building for client \n Do not use space </b>', 
             name: 'PLACEHOLDER', 
             trim: false
             )
