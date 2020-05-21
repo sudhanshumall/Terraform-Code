@@ -30,7 +30,7 @@ pipeline {
                 
                 sh "echo place holder : ${params.PLACEHOLDER}"
                 sh "echo job base name : ${JOB_BASE_NAME}"
-                sh "echo job name : ${JOBNAME}"
+                sh "echo job name : ${JOBNAME}-job"
 
                 script {
                     echo "inside script"
@@ -63,7 +63,7 @@ pipeline {
 
                     sh """
 
-                        echo "job name : ${JOBNAME}"
+                        echo "job name : ${JOBNAME}-job"
 
                     """
                    
