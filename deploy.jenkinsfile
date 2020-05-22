@@ -26,7 +26,7 @@ pipeline {
             )
 
         string(
-            defaultValue: 'default', 
+            defaultValue: '', 
             description: '<b> Mention BUILD Number, if looking for specific build. Else leave empty </b>', 
             name: 'BUILD_NUMBER', 
             trim: false
@@ -78,7 +78,16 @@ pipeline {
                 expression { params.BRANCH_NAME == 'dev' }
             }
             steps {
-                echo "deploying on dev"
+                script {
+
+                    if (BUILD_NUMBER == 0){
+                        sh "echo build number is 0"
+                    
+                    } else {
+                        sh "echo in else part" 
+                    }
+
+                }
             }
                             
             
