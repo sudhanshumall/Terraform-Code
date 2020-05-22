@@ -81,7 +81,7 @@ pipeline {
                 script {
 
                     sh """
-                        if [ "${param.BUILD_NUMBER}" -eq "0" ] ; then
+                        if [ ${BUILD_NUMBER} -eq 0 ] ; then
                         echo "Build number is 0"
                         else 
                         echo "in else part"
