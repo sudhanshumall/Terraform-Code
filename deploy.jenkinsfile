@@ -56,7 +56,7 @@ pipeline {
             steps {
                 echo "deploying on prod"
             }
-            }
+            
         }
         
         stage('Deploying on Dev') {
