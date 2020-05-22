@@ -49,6 +49,30 @@ pipeline {
     
         stage('Downloading WAR') {
 
+            when {
+                // Only say hello if a "greeting" is requested
+                expression { params.BRANCH_NAME == 'master' }
+            }
+            steps {
+                echo "deploying on prod"
+            }
+
+            when {
+                // Only say hello if a "greeting" is requested
+                expression { params.BRANCH_NAME == 'dev' }
+            }
+            steps {
+                echo "deploying on dev"
+            }
+
+            when {
+                // Only say hello if a "greeting" is requested
+                expression { params.BRANCH_NAME == 'beta' }
+            }
+            steps {
+                echo "deploying on qa"
+            }
+
             steps {
 
                 script {
