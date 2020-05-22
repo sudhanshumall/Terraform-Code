@@ -19,6 +19,22 @@ pipeline {
 
     stages {
     
+        stage('Downloading WAR') {
+
+            steps {
+
+                script {
+
+                    if (BRANCH_NAME == master) {
+                        sh "echo master branch"
+                    } else {
+                        sh "non master"
+                    }
+
+                }
+            }
+        }
+        
         stage('Testing Code') {
 
 
