@@ -97,7 +97,7 @@ pipeline {
 
                     sh """
 
-                        if [ ${Deploy_Kagami_Studio} ]; then
+                        if [ ${Deploy_Kagami_Studio} = true ]; then
                             if [ -z ${KAGAMI_STUDIO_BUILD_NUMBER} ]; then
                                 echo "deploying latest build"
                             else
@@ -108,7 +108,7 @@ pipeline {
                         
                         fi
 
-                        if [ ${Deploy_Kagami_Framework} ]; then
+                        if [ ${Deploy_Kagami_Framework} = true ]; then
                             if [ -z ${KAGAMI_FRAMEWORK_BUILD_NUMBER} ]; then
                                 echo "deploying latest build"
                             else
@@ -119,7 +119,7 @@ pipeline {
                         
                         fi
 
-                        if [ ${Deploy_Kagami_Authentication} ]; then
+                        if [ ${Deploy_Kagami_Authentication} = true ]; then
                             if [ -z ${KAGAMI_AUTHENTICATION_BUILD_NUMBER} ]; then
                                 echo "deploying latest build"
                             else
@@ -131,7 +131,7 @@ pipeline {
                         
                         fi
 
-                        if [ ${Deploy_Kagami_App_Downloader} ]; then
+                        if [ ${Deploy_Kagami_App_Downloader} = true ]; then
                             if [ -z ${KAGAMI_APPDOWNLOADER_BUILD_NUMBER} ]; then
                                 echo "deploying latest build"
                             else
