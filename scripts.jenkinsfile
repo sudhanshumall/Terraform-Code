@@ -3,6 +3,7 @@
  def JOB = JOB_NAME.tokenize('/') as String[]
  def JOBNAME = JOB[0]
  def S3_BUCKET = JOBNAME
+ def status = sh(script:"aws s3 ls s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket234'", returnStatus:true)
  
 
 pipeline {
@@ -66,11 +67,7 @@ pipeline {
         stage('Testing Code') {
 
 
-            sh """ 
-                        echo "${S3_BUCKET}-${BRANCH_NAME}-war-backup"
-                        aws s3 ls s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket234';echo \$? > exitstatus
-                    """
-            def EXITSTATUS = readFile 'exitstatus'
+            
             
             steps {
 
@@ -81,7 +78,7 @@ pipeline {
                         
                         
                     
-                    if [ ${EXITSTATUS} -eq 0 ] ; then
+                    if [ ${status} -eq 0 ] ; then
                         echo "Bucket doesn't exist and hence creating the bucket"
                     
 
