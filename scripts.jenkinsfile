@@ -64,15 +64,18 @@ pipeline {
         }
 
         stage('Testing Code') {
+
+
+            sh """ 
+                        echo "${S3_BUCKET}-${BRANCH_NAME}-war-backup"
+                        aws s3 ls s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket234';echo \$? > exitstatus
+                    """
+            def EXITSTATUS = readFile 'exitstatus'
             
             steps {
 
                     
-                    sh """ 
-                        echo "${S3_BUCKET}-${BRANCH_NAME}-war-backup"
-                        aws s3 ls s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket234';echo \$? > exitstatus
-                    """
-                    EXITSTATUS = readFile 'exitstatus'
+                    
                     sh """
                         #!/bin/bash
                         
