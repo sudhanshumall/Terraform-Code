@@ -8,11 +8,7 @@
 pipeline {
     //agent any
 
-    environment {
-
-        S3_BUCKET
-
-    }
+    
     agent {
         label {
             label ""
