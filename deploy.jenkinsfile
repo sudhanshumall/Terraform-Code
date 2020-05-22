@@ -81,10 +81,10 @@ pipeline {
                 script {
 
                     sh """
-                        if [ ${BUILD_NUMBER} = 0 ] ; then
-                        echo "Build number is 0"
+                        if [ -z ${BUILD_NUMBER} ] ; then
+                        echo "Build number is empty"
                         else 
-                        echo "in else part"
+                        echo "Build number not empty"
                         
                     fi    
 
