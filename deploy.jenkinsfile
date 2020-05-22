@@ -56,20 +56,6 @@ pipeline {
             steps {
                 echo "deploying on prod"
             }
-
-            steps {
-
-                script {
-
-                    sh """
-                        echo "${params.PLACEHOLDER}"
-                        echo "${BRANCH_NAME}"
-                        echo "${ENVIRONMENT}"
-                        echo "${BUILD_NUMBER}"
-
-                    """
-
-                }
             }
         }
         
