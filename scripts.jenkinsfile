@@ -8,6 +8,11 @@
 pipeline {
     //agent any
 
+    environment {
+
+        S3_BUCKET
+
+    }
     agent {
         label {
             label ""
@@ -68,8 +73,8 @@ pipeline {
                     sh '''
                         #!/bin/bash
                         
-                        echo '"\${S3_BUCKET}"-${BRANCH_NAME}-war-backup'
-                        aws s3 ls s3://"\${S3_BUCKET}"-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket'
+                        echo "\${S3_BUCKET}-${BRANCH_NAME}-war-backup"
+                        aws s3 ls s3://"\${S3_BUCKET}-${BRANCH_NAME}-war-backup" 2>&1 | grep 'NoSuchBucket'
                    
                     
                     if [ $? -eq 0 ] ; then
