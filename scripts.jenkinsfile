@@ -72,27 +72,16 @@ pipeline {
             steps {
                     script {
                     def status = sh(script:"aws s3 ls s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket234'", returnStatus:true)
-                    def exitstatus = status
-                    sh "echo ${exitstatus}"
+                    
+                    if (status == 0) {
+                        sh "echo Bucket doesn't exist and hence creating the bucket"
+                    } else {
+                        sh "echo Bucket alreay present"
                     }
-                    sh """
-                        #!/bin/bash
-                        
-                        
-                    
-                    if [ ${exitstatus} -eq 0 ] ; then
-                        echo "Bucket doesn't exist and hence creating the bucket"
-                    
 
-                     
+                    
+                    }
                             
-                        else
-                            echo "Bucket alreay present"
-                        fi
-
-                    """
-                   
-                
             }
         }
 
