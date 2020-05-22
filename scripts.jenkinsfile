@@ -63,7 +63,7 @@ pipeline {
 
             steps {
 
-                script {
+                
 
                     sh """
                         S3_BUCKET = ${S3_BUCKET}
@@ -80,7 +80,7 @@ pipeline {
 
                     """
                    
-                }
+                
             }
         }
 
