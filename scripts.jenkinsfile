@@ -65,10 +65,10 @@ pipeline {
                 script {
 
                     sh """
-
+                        S3_BUCKET = ${S3_BUCKET}
                         echo "job name : ${JOBNAME}"
 
-                        echo "S3 Bucket : ${S3_BUCKET}-${BRANCH_NAME}-war-backup"
+                        echo "S3 Bucket : $S3_BUCKET-$BRANCH_NAME-war-backup"
                         status = `echo $?`
                         if [ $status -eq 0 ] ; then
                             echo "working"
