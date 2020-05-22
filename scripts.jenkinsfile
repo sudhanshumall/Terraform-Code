@@ -3,7 +3,7 @@
  def JOB = JOB_NAME.tokenize('/') as String[]
  def JOBNAME = JOB[0]
  def S3_BUCKET = JOBNAME
- def result = sh(script: "aws s3 ls s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket'", returnStatus: true)
+ 
 
 pipeline {
     //agent any
@@ -65,20 +65,19 @@ pipeline {
 
                 
 
-                    sh """
-                        S3_BUCKET = ${S3_BUCKET}
-                        echo "job name : ${JOBNAME}"
-
-                        echo "S3 Bucket : $S3_BUCKET-$BRANCH_NAME-war-backup"
-                        
-                        if [ $result -eq 0 ] ; then
-                            echo "working"
-                            
+                    sh '''
+                        S3_BUCKET = "${S3_BUCKET}"
+                        echo "$S3_BUCKET-$BRANCH_NAME-war-backup"
+                        aws s3 ls "s3://$S3_BUCKET-$BRANCH_NAME-war-backup" 2>&1 | grep 'NoSuchBucket'
+                        status = `echo $?`
+                        if [ $status -eq 0 ] ; then
+                            echo "Bucket doesn't exist and hence creating the bucket"
+                            aws s3 mb "s3://$S3_BUCKET-$BRANCH_NAME-war-backup"
                         else
-                            echo "not working"
+                            echo "Bucket alreay present"
                         fi
 
-                    """
+                    '''
                    
                 
             }
