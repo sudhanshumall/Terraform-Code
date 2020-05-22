@@ -63,7 +63,7 @@ pipeline {
 
             steps {
 
-                
+                result = sh(script: "aws s3 ls s3://$S3_BUCKET-$BRANCH_NAME-war-backup 2>&1 | grep 'NoSuchBucket'", returnStatus: true)
 
                     sh """
                         S3_BUCKET = ${S3_BUCKET}
@@ -71,7 +71,7 @@ pipeline {
 
                         echo "S3 Bucket : $S3_BUCKET-$BRANCH_NAME-war-backup"
                         
-                        if [ "$?" -eq "0" ] ; then
+                        if [ $result -eq 0 ] ; then
                             echo "working"
                             
                         else
