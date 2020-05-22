@@ -63,11 +63,12 @@ pipeline {
             
             steps {
 
-                
+                    S3_BUKCET = "${S3_BUKCET}"
+                    echo $S3_BUKCET
 
-                    sh """
+                    sh '''
                         
-                        S3_BUKCET = "${S3_BUKCET}"
+                        
                         echo "${S3_BUCKET}-${BRANCH_NAME}-war-backup"
                         aws s3 ls s3://$S3_BUCKET-$BRANCH_NAME-war-backup 2>&1 | grep 'NoSuchBucket'
                         status = `echo "$?"`
@@ -78,7 +79,7 @@ pipeline {
                             echo "Bucket alreay present"
                         fi
 
-                    '''
+                    ''''
                    
                 
             }
