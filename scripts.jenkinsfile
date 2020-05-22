@@ -70,6 +70,13 @@ pipeline {
 
                         echo "S3 Bucket : ${S3_BUCKET}-${BRANCH_NAME}-war-backup"
 
+                        if [ $status -eq 0 ] ; then
+                            echo "working"
+                            
+                        else
+                            echo "not working"
+                        fi
+
                     """
                    
                 }
