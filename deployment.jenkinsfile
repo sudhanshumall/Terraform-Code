@@ -99,9 +99,9 @@ pipeline {
 
                         if [ ${Deploy_Kagami_Studio} ]; then
                             if [ -z ${KAGAMI_STUDIO_BUILD_NUMBER} ]; then
-                                echo "Deploying specfic build number"
-                            else
                                 echo "deploying latest build"
+                            else
+                                echo "Deploying specfic build number"
                             fi
                         else
                             echo "Not Selected, so not deploying"
@@ -110,9 +110,9 @@ pipeline {
 
                         if [ ${Deploy_Kagami_Framework} ]; then
                             if [ -z ${KAGAMI_FRAMEWORK_BUILD_NUMBER} ]; then
-                                echo "Deploying specfic build number"
-                            else
                                 echo "deploying latest build"
+                            else
+                                echo "Deploying specfic build number"
                             fi
                         else
                             echo "Not Selected, so not deploying"
@@ -121,10 +121,11 @@ pipeline {
 
                         if [ ${Deploy_Kagami_Authentication} ]; then
                             if [ -z ${KAGAMI_AUTHENTICATION_BUILD_NUMBER} ]; then
-                                echo "Deploying specfic build number"
-                            else
                                 echo "deploying latest build"
+                            else
+                                echo "Deploying specfic build number"
                             fi
+                            
                         else
                             echo "Not Selected, so not deploying"
                         
@@ -132,9 +133,9 @@ pipeline {
 
                         if [ ${Deploy_Kagami_App_Downloader} ]; then
                             if [ -z ${KAGAMI_APPDOWNLOADER_BUILD_NUMBER} ]; then
-                                echo "Deploying specfic build number"
-                            else
                                 echo "deploying latest build"
+                            else
+                                echo "Deploying specfic build number"
                             fi
                         else
                             echo "Not Selected, so not deploying"
