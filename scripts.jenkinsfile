@@ -3,7 +3,7 @@
  def JOB = JOB_NAME.tokenize('/') as String[]
  def JOBNAME = JOB[0]
  def S3_BUCKET = JOBNAME
- 
+ def status
  
 
 pipeline {
@@ -71,7 +71,7 @@ pipeline {
             
             steps {
 
-                    def status = sh(script:"aws s3 ls s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket234'", returnStatus:true)
+                    status = sh(script:"aws s3 ls s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket234'", returnStatus:true)
                     
                     sh """
                         #!/bin/bash
