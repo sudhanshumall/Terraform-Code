@@ -65,14 +65,14 @@ pipeline {
 
                 
 
-                    sh '''
-                        S3_BUCKET = "${S3_BUCKET}"
-                        echo "$S3_BUCKET-$BRANCH_NAME-war-backup"
-                        aws s3 ls "s3://$S3_BUCKET-$BRANCH_NAME-war-backup" 2>&1 | grep 'NoSuchBucket'
+                    sh """
+                        
+                        echo "${S3_BUCKET}-${BRANCH_NAME}-war-backup"
+                        aws s3 ls "s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup" 2>&1 | grep 'NoSuchBucket'
                         status = `echo $?`
                         if [ $status -eq 0 ] ; then
                             echo "Bucket doesn't exist and hence creating the bucket"
-                            aws s3 mb "s3://$S3_BUCKET-$BRANCH_NAME-war-backup"
+                            aws s3 mb "s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup"
                         else
                             echo "Bucket alreay present"
                         fi
