@@ -68,15 +68,17 @@ pipeline {
             steps {
 
                     
-
+                    sh """ 
+                        echo "${S3_BUCKET}-${BRANCH_NAME}-war-backup"
+                        aws s3 ls s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket234';echo \$? > exitstatus
+                    """
+                    EXITSTATUS = readFile 'exitstatus'
                     sh """
                         #!/bin/bash
                         
-                        echo "${S3_BUCKET}-${BRANCH_NAME}-war-backup"
-                        exitcode=\$(aws s3 ls s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket234';echo \$?)
-                   
+                        
                     
-                    if [ \$exitcode -eq 0 ] ; then
+                    if [ ${EXITSTATUS} -eq 0 ] ; then
                         echo "Bucket doesn't exist and hence creating the bucket"
                     
 
