@@ -80,7 +80,7 @@ pipeline {
             steps {
                 script {
 
-                    if (params.BUILD_NUMBER == 0){
+                    if ("${params.BUILD_NUMBER}" == 0){
                         sh "echo build number is 0"
                     
                     } else {
