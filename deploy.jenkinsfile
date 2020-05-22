@@ -15,6 +15,34 @@ pipeline {
             
             }
         }
+    
+    parameters {
+
+        string(
+            defaultValue: 'default', 
+            description: '<b> Mention Client name, if want to test </b>', 
+            name: 'PLACEHOLDER', 
+            trim: false
+            )
+
+        string(
+            defaultValue: 'default', 
+            description: '<b> Mention BUILD Number, if looking for specific build. Else leave empty </b>', 
+            name: 'BUILD_NUMBER', 
+            trim: false
+            )
+
+        choice(
+            choices: ['dev' , 'beta' , 'master'],
+            description: '<b> Select Branch which you want to deploy </b>',
+            name: 'BRANCH_NAME')
+
+        choice(
+            choices: ['local_onpremise' , 'beta' , 'prod'],
+            description: '<b> Select Environment where you want to deploy  </b>',
+            name: 'ENVIRONMENT')
+        
+    }
 
 
     stages {
@@ -25,11 +53,13 @@ pipeline {
 
                 script {
 
-                    if (BRANCH_NAME == master) {
-                        sh "echo master branch"
-                    } else {
-                        sh "non master"
-                    }
+                    sh """
+                        echo "${params.PLACEHOLDER}"
+                        echo "${BRANCH_NAME}"
+                        echo "${ENVIRONMENT}"
+                        echo "${BUILD_NUMBER}"
+
+                    """
 
                 }
             }
