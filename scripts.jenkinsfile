@@ -69,7 +69,7 @@ pipeline {
                         echo "job name : ${JOBNAME}"
 
                         echo "S3 Bucket : ${S3_BUCKET}-${BRANCH_NAME}-war-backup"
-
+                        status = `echo $?`
                         if [ $status -eq 0 ] ; then
                             echo "working"
                             
