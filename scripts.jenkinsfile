@@ -60,10 +60,10 @@ pipeline {
         }
 
         stage('Testing Code') {
-
+            result = sh(script: "aws s3 ls s3://$S3_BUCKET-$BRANCH_NAME-war-backup 2>&1 | grep 'NoSuchBucket'", returnStatus: true)
             steps {
 
-                result = sh(script: "aws s3 ls s3://$S3_BUCKET-$BRANCH_NAME-war-backup 2>&1 | grep 'NoSuchBucket'", returnStatus: true)
+                
 
                     sh """
                         S3_BUCKET = ${S3_BUCKET}
