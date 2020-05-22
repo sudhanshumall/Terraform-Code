@@ -67,9 +67,9 @@ pipeline {
 
                     sh """
                         
-                        S3_BUCKET = "${S3_BUCKET}"
-                        echo "$S3_BUCKET-$BRANCH_NAME-war-backup"
-                        aws s3 ls s3://$S3_BUCKET-$BRANCH_NAME-war-backup 2>&1 | grep 'NoSuchBucket'
+                        
+                        echo "${S3_BUCKET}-${BRANCH_NAME}-war-backup"
+                        aws s3 ls s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket'
                     """
                     sh  '''
                     status = `echo "$?"`
