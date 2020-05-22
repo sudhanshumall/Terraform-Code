@@ -72,8 +72,8 @@ pipeline {
                     sh '''
                         #!/bin/bash
                         
-                        echo "\${env.BUCKET}-${BRANCH_NAME}-war-backup"
-                        aws s3 ls s3://"\${env.BUCKET}-${BRANCH_NAME}-war-backup" 2>&1 | grep 'NoSuchBucket'
+                        echo '"\${env.BUCKET}"-${BRANCH_NAME}-war-backup'
+                        aws s3 ls s3://"\${env.BUCKET}"-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket'
                    
                     
                     if [ $? -eq 0 ] ; then
