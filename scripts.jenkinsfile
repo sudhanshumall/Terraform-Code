@@ -73,7 +73,7 @@ pipeline {
                         #!/bin/bash
                         
                         echo "${S3_BUCKET}-${BRANCH_NAME}-war-backup"
-                        exitcode=`aws s3 ls s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket234';echo \$?`
+                        exitcode=\$(aws s3 ls s3://${S3_BUCKET}-${BRANCH_NAME}-war-backup 2>&1 | grep 'NoSuchBucket234';echo \$?)
                    
                     
                     if [ \$exitcode -eq 0 ] ; then
