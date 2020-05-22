@@ -1,0 +1,213 @@
+// Define variable
+ 
+ def JOB = JOB_NAME.tokenize('/') as String[]
+ def JOBNAME = JOB[0]
+ def S3_BUCKET = JOBNAME
+ 
+ 
+
+pipeline {
+    //agent any
+    
+    agent {
+        label {
+            label ""
+            
+            }
+        }
+    
+    parameters {
+
+        string(
+            defaultValue: 'default', 
+            description: '<b> Mention Client name, if want to test </b>', 
+            name: 'PLACEHOLDER', 
+            trim: false
+            )
+
+        string(
+            defaultValue: '', 
+            description: '<b> Mention BUILD Number, if looking for specific build to be deployed. Else leave empty to deploy latest code </b>', 
+            name: 'KAGAMI_STUDIO_BUILD_NUMBER', 
+            trim: false
+            )
+
+        string(
+            defaultValue: '', 
+            description: '<b> Mention BUILD Number, if looking for specific buildto be deployed. Else leave empty to deploy latest code </b>', 
+            name: 'KAGAMI_FRAMEWORK_BUILD_NUMBER', 
+            trim: false
+            )
+        
+        string(
+            defaultValue: '', 
+            description: '<b> Mention BUILD Number, if looking for specific build to be deployed. Else leave empty to deploy latest code </b>', 
+            name: 'KAGAMI_AUTHENTICATION_BUILD_NUMBER', 
+            trim: false
+            )
+
+        string(
+            defaultValue: '', 
+            description: '<b> Mention BUILD Number, if looking for specific build to be deployed. Else leave empty to deploy latest code </b>', 
+            name: 'KAGAMI_APPDOWNLOADER_BUILD_NUMBER', 
+            trim: false
+            )
+
+        choice(
+            choices: ['dev' , 'beta' , 'master'],
+            description: '<b> Select Branch which you want to deploy </b>',
+            name: 'BRANCH_NAME')
+
+        choice(
+            choices: ['local_onpremise' , 'beta' , 'prod'],
+            description: '<b> Select Environment where you want to deploy  </b>',
+            name: 'ENVIRONMENT')
+        
+        booleanParam(
+            defaultValue: true, 
+            description: '<b> Please select if latest code needs to be deployed </b> ', 
+            name: 'Deploy_Kagami_Studio')
+
+        booleanParam(
+            defaultValue: true, 
+            description: '<b> Please select if latest code needs to be deployed </b> ', 
+            name: 'Deploy_Kagami_Framework')
+        
+        booleanParam(
+            defaultValue: false, 
+            description: '<b> Please select if latest code needs to be deployed </b> ', 
+            name: 'Deploy_Kagami_Authentication')
+        
+        booleanParam(
+            defaultValue: false, 
+            description: '<b> Please select if latest code needs to be deployed </b> ', 
+            name: 'Deploy_Kagami_App_Downloader')
+    }
+
+    stages {
+    
+        stage('Deploying on Local Onpremise') {
+  
+            when {
+                expression { params.BRANCH_NAME == 'dev' }
+            }
+            steps {
+
+                script {
+
+                    sh """
+
+                        if [ ${Deploy_Kagami_Studio} = true ]; then
+                            if [ -z ${KAGAMI_STUDIO_BUILD_NUMBER} ]; then
+                                echo "Deploying specfic build number"
+                            else
+                                echo "deploying latest build"
+                            fi
+                        else
+                            echo "Not Selected, so not deploying"
+                        
+                        fi
+
+                        if [ ${Deploy_Kagami_Framework} = true ]; then
+                            if [ -z ${KAGAMI_FRAMEWORK_BUILD_NUMBER} ]; then
+                                echo "Deploying specfic build number"
+                            else
+                                echo "deploying latest build"
+                            fi
+                        else
+                            echo "Not Selected, so not deploying"
+                        
+                        fi
+
+                        if [ ${Deploy_Kagami_Authentication} = true ]; then
+                            if [ -z ${KAGAMI_AUTHENTICATION_BUILD_NUMBER} ]; then
+                                echo "Deploying specfic build number"
+                            else
+                                echo "deploying latest build"
+                            fi
+                        else
+                            echo "Not Selected, so not deploying"
+                        
+                        fi
+
+                        if [ ${Deploy_Kagami_App_Downloader} = true ]; then
+                            if [ -z ${KAGAMI_APPDOWNLOADER_BUILD_NUMBER} ]; then
+                                echo "Deploying specfic build number"
+                            else
+                                echo "deploying latest build"
+                            fi
+                        else
+                            echo "Not Selected, so not deploying"
+                        
+                        fi
+
+                    """
+                }
+            }         
+        }
+
+        stage('Deploying on QA') {
+     
+            when {
+                expression { params.BRANCH_NAME == 'beta' }
+            }
+            steps {
+
+                script {
+
+                    sh """
+
+                        if [ -z ${BUILD_NUMBER} ] ; then
+                        echo "Build number is empty"
+                        else 
+                        echo "Build number not empty"
+                        
+                    fi    
+
+                    """
+                }
+            }                    
+        }
+
+        stage('Deploying on Prod') {
+
+            when {
+                expression { params.BRANCH_NAME == 'master' }
+            }
+            steps {
+
+                script {
+
+                    sh """
+
+                        if [ -z ${BUILD_NUMBER} ] ; then
+                        echo "Build number is empty"
+                        else 
+                        echo "Build number not empty"
+                        
+                    fi    
+
+                    """
+                }
+            }            
+        }
+
+        stage('Details') {
+
+            steps {
+
+                sh """  
+
+                    echo "---------------------------------"
+                    echo "${PLACEHOLDER}"
+                    echo "${BRANCH}"
+                    echo "${BUILD_NUMBER}"
+                    echo "${ENVIRONMENT}"
+                    
+                    echo "---------------------------------"
+
+                """
+            }
+        }
+    }
+}
